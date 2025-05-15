@@ -1,0 +1,27 @@
+spring:
+  profiles:
+    active: dev
+  # Database Properties
+  data:
+    mongodb:
+      authentication-database: admin
+      uri: ${DATABASE_URL}
+      auto-index-creation: true
+  banner:
+    charset: UTF-8
+  # Multipart Properties
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 200MB
+      max-request-size: 200MB
+logging:
+  level:
+    org:
+      springframework:
+        data:
+          mongodb:
+            repository:
+              query: DEBUG
+server:
+  port: ${PORT}
