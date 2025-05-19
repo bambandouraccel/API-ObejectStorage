@@ -27,7 +27,6 @@ pipeline {
     }
 
     stage('SonarQube Analysis') {
-      def mvn = tool 'Default Maven';
       withSonarQubeEnv('sonarqube') {
         sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=objectStorage_api -Dsonar.projectName='objectStorage_api'"
       }
