@@ -27,7 +27,7 @@ pipeline {
     stage('SonarQube Analysis') {
        steps {
           withSonarQubeEnv('sonarqube') {
-          sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=objectStorage_api -Dsonar.projectName='objectStorage_api'"
+          sh "mvn clean verify sonar:sonar -Dsonar.projectKey=objectStorage_api -Dsonar.projectName='objectStorage_api'"
         }
       }
     }
