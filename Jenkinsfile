@@ -18,11 +18,9 @@ pipeline {
     //   }
     // }
 
-    stage('Build & Test') {
+    stage('Build') {
       steps {
-        dir('backend') {
           sh 'mvn clean install -DskipTests'
-        }
       }
     }
 
