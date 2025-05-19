@@ -24,7 +24,7 @@ logging:
             repository:
               query: DEBUG
 server:
-  port: ${PORT}
+  port: 
 
 #
 #openshift:
