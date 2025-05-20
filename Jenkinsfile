@@ -32,16 +32,9 @@ pipeline {
     stage('Build') {
       steps {
           sh 'mvn clean install'
-          //sh 'mvn compile'
       }
     }
 
-    // stage('test') {
-    //   steps {
-    //       sh 'mvn clean install -DskipTests'
-    //       sh 'mvn test'
-    //   }
-    // }
 
     stage('SonarQube Analysis') {
        steps {
