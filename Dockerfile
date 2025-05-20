@@ -11,7 +11,7 @@ RUN ./mvnw package -DskipTests
 FROM openjdk:17-jre
 WORKDIR /usr/app
 COPY --from=builder /usr/build/target/rest-api.jar rest-api.jar
-EXPOSE 8080
+EXPOSE 8085
 ENTRYPOINT ["java","-jar","rest-api.jar"]
 
 
