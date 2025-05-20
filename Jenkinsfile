@@ -11,16 +11,27 @@ pipeline {
 
 
   stages {
-    
+
+    stage('Checkout repo database') {
+       steps {
+          dir('mongodb-database-for-objectStorage') {
+            git credentialsId: 'ssh-jenkins',
+               url: 'https://github.com/bambandouraccel/mongodb-database-for-objectStorage.git',
+               branch: 'main'
+          }
+       }
+    }
     stage('Start Database') {
        steps {
-         sh 'docker-compose -f docker-compose.yml up -d'
+         dir('mongodb-database-for-objectStorage') {
+           sh 'docker-compose -f docker-compose.yml up -d'
+         }
        }
     }
 
     stage('Build') {
       steps {
-          sh 'mvn clean install -DskipTests'
+          sh 'mvn clean install'
           //sh 'mvn compile'
       }
     }
