@@ -12,25 +12,25 @@ pipeline {
 
   stages {
     
-    // stage('Start Database') {
-    //   steps {
-    //     sh 'docker-compose -f docker-compose.yml up -d'
-    //   }
-    // }
+    stage('Start Database') {
+       steps {
+         sh 'docker-compose -f docker-compose.yml up -d'
+       }
+    }
 
     stage('Build') {
       steps {
-          // sh 'mvn clean install -DskipTests'
-          sh 'mvn compile'
+          sh 'mvn clean install -DskipTests'
+          //sh 'mvn compile'
       }
     }
 
-    stage('test') {
-      steps {
-          sh 'mvn clean install -DskipTests'
-          // sh 'mvn test'
-      }
-    }
+    // stage('test') {
+    //   steps {
+    //       sh 'mvn clean install -DskipTests'
+    //       sh 'mvn test'
+    //   }
+    // }
 
     stage('SonarQube Analysis') {
        steps {
