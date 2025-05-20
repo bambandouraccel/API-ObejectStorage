@@ -3,7 +3,7 @@ pipeline {
   environment {
         APP_NAME= "objectStorage"
         OPENSHIFT_PROJECT = 'devops'
-        IMAGE_NAME= "objectStorage_api"
+        IMAGE_NAME= "object_storage_api"
         DOCKER_USER= "mina0423"
         OC_SERVER= "https://api.ocp.heritage.africa:6443"
     }
