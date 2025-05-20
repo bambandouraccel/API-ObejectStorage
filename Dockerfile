@@ -6,8 +6,8 @@ COPY . .
 #COPY .mvn .mvn
 #COPY mvnw .
 #COPY pom.xml .
-#RUN chmod +x mvnw
-RUN mvn clean package -DskipTests
+RUN chmod +x mvnw
+RUN ./mvnw clean package -DskipTests
 
 ## EXECUTE APPLICATION stage 2 ##
 FROM openjdk:17
