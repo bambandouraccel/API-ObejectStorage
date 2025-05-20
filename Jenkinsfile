@@ -24,7 +24,7 @@ pipeline {
     stage('Start Database') {
        steps {
          dir('mongodb-database-for-objectStorage') {
-           sh 'docker-compose -f docker-compose.yml up -d'
+           sh 'docker compose -f docker-compose.yml up -d'
          }
        }
     }
