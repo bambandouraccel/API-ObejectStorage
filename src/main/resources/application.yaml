@@ -5,7 +5,7 @@ spring:
   data:
     mongodb:
       authentication-database: admin
-      uri: ${DATABASE_URL}
+      uri: mongodb://admin:admin@192.168.15.115:27017/objectStorageDB?authSource=admin
       auto-index-creation: true
   banner:
     charset: UTF-8
