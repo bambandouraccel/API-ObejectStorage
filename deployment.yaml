@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: object_storage_api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: object_storage_api
+  template:
+    metadata:
+      labels:
+        app: object_storage_api
+    spec:
+      containers:
+      - name: object_storage_api
+        image: docker.io/mina0423/object_storage_api:latest
+        ports:
+        - containerPort: 8085
