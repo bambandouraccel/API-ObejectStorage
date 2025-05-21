@@ -31,6 +31,7 @@ pipeline {
 
     stage('Build') {
       steps {
+          echo "${env.WORKSPACE}"
           sh 'mvn clean install'
       }
     }
