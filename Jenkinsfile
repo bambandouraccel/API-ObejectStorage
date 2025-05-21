@@ -61,9 +61,9 @@ pipeline {
        steps {
           script {
              def imageTag= "$DOCKER_USER/$IMAGE_NAME:v${env.BUILD_NUMBER}"
-                dir('${env.WORKSPACE}'){
+                // dir('${env.WORKSPACE}'){
                   sh "docker build -t ${imageTag} ."
-                }
+                // }
           }
        }
     }
