@@ -31,7 +31,6 @@ pipeline {
 
     stage('Build') {
       steps {
-          echo "${env.WORKSPACE}"
           sh 'mvn clean install'
       }
     }
@@ -62,7 +61,7 @@ pipeline {
        steps {
           script {
              def imageTag= "$DOCKER_USER/$IMAGE_NAME:v${env.BUILD_NUMBER}"
-                dir('${env.WORKSPACE/backend_job}'){
+                dir('${env.WORKSPACE}'){
                   sh "docker build -t ${imageTag} ."
                 }
           }
