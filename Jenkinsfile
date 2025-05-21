@@ -58,13 +58,15 @@ pipeline {
     }
 
     stage('build image Docker') {
-            steps {
-                script {
-                    def imageTag= "$DOCKER_USER/$IMAGE_NAME:v${env.BUILD_NUMBER}"
-                    sh "docker build -t ${imageTag} ."
+       steps {
+          script {
+             def imageTag= "$DOCKER_USER/$IMAGE_NAME:v${env.BUILD_NUMBER}"
+                dir('${env.WORKSPACE}'){
+                  sh "docker build -t ${imageTag} ."
                 }
-            }
-        }
+          }
+       }
+    }
     stage('push image Docker') {
         steps {
             withCredentials([usernamePassword(credentialsId: 'docker_registry', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
