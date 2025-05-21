@@ -2,7 +2,7 @@
 FROM maven:3.9-eclipse-temurin-17 AS builder
 WORKDIR /app
 COPY . .
-RUN mvn clean package 
+RUN mvn clean install 
 
 ## EXECUTE APPLICATION stage 2 ##
 FROM openjdk:17-jdk
