@@ -92,6 +92,8 @@ pipeline {
 
     stage('Deploy to openshift') {
         steps {
+            sh "oc create configmap spring-env --from-env-file=.env"
+
             sh 'oc project $OPENSHIFT_PROJECT'
             sh "sed -i 's|image: .*|image: ${DOCKER_USER}/${IMAGE_NAME}:v${env.BUILD_NUMBER}|' deployment.yaml"
             sh "oc apply -f deployment.yaml"
