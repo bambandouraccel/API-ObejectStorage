@@ -89,8 +89,19 @@ pipeline {
             }
         }
     }
+    stage('Deploy database to openshift') {
+       steps {
+          dir('mongodb-database-for-objectStorage') {
+            git credentialsId: 'ssh-jenkins',
+               url: 'https://github.com/bambandouraccel/mongodb-database-for-objectStorage.git',
+               branch: 'main'
+            sh "oc create configmap db-env --from-env-file=.env"
+            sh " oc apply -f mongodb-deployment.yaml"
+          }
+       }
+    }
 
-    stage('Deploy to openshift') {
+    stage('Deploy objectStorage_api to openshift') {
         steps {
             sh "oc create configmap os-env --from-env-file=.env"
 
@@ -99,6 +110,9 @@ pipeline {
             sh "oc apply -f deployment.yaml"
         }
     }
+
+     
+    
     
     
 
