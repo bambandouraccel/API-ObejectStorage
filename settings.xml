@@ -1,7 +1,0 @@
-<mirrors>
-  <mirror>
-    <id>nexus</id>
-    <mirrorOf>*</mirrorOf>
-    <url>http://192.168.15.115:8081/repository/objectStorage/</url>
-  </mirror>
-</mirrors>
