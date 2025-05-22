@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: object_storage_api
+  name: object_storage_service
 spec:
   selector:
     app: object_storage_api
