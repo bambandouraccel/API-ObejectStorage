@@ -1,22 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: spring-backend
+  name: mongodb
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: spring-backend
+      app: mongodb
   template:
     metadata:
       labels:
-        app: spring-backend
+        app: mongodb
     spec:
       containers:
-      - name: spring-backend
-        image: docker.io/tonuser/ton-backend:latest
+      - name: mongodb
+        image: mongo:6
         ports:
-        - containerPort: 8080
+        - containerPort: 27017
         envFrom:
         - configMapRef:
-            name: spring-env
+            name: db-env
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb-service
+spec:
+  selector:
+    app: mongodb
+  ports:
+    - port: 27017
+      targetPort: 27017
