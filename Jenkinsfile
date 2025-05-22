@@ -93,6 +93,7 @@ pipeline {
             git credentialsId: 'ssh-jenkins',
                url: 'https://github.com/bambandouraccel/mongodb-database-for-objectStorage.git',
                branch: 'main'
+            sh "oc delete configmap db-env"
             sh "oc create configmap db-env --from-env-file=.env"
             sh " oc apply -f mongodb-deployment.yaml"
           }
