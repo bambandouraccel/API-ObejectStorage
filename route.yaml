@@ -1,12 +1,11 @@
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  name: object-storage-route
+  name: object_storage_route
 spec:
   to:
     kind: Service
-    name: backend-service
-  port:
+    name: object_storage_service
     targetPort: 8085
   tls:
     termination: edge
