@@ -95,7 +95,6 @@ pipeline {
                branch: 'main'
             sh "oc delete configmap db-env"
             sh "oc create configmap db-env --from-env-file=.env "
-            sh "oc create configmap db-env --from-env-file=.env"
             sh " oc apply -f mongodb-deployment.yaml"
           }
        }
