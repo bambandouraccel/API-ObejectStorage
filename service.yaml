@@ -4,7 +4,7 @@ metadata:
   name: object_storage_service
 spec:
   selector:
-    app: object_storage_api
+    app: objectstorage
   ports:
     - protocol: TCP
       port: 8085
