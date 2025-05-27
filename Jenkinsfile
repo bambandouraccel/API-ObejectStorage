@@ -102,7 +102,7 @@ pipeline {
 
     stage('Deploy objectStorage_api to openshift') {
         steps {
-            sh "oc delete configmap db-env"
+            sh "oc delete configmap os-env"
             sh "oc create configmap os-env --from-env-file=.env"
             sh 'oc project $OPENSHIFT_PROJECT'
             sh "sed -i 's|image: .*|image: ${DOCKER_USER}/${IMAGE_NAME}:v${env.BUILD_NUMBER}|' deployment.yaml"
