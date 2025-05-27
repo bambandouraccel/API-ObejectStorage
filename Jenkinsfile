@@ -93,8 +93,8 @@ pipeline {
             git credentialsId: 'ssh-jenkins',
                url: 'https://github.com/bambandouraccel/mongodb-database-for-objectStorage.git',
                branch: 'main'
-            sh "oc delete configmap db-env"
-            sh "oc create configmap db-env --from-env-file=.env "
+            // sh "oc delete configmap db-env"
+            // sh "oc create configmap db-env --from-env-file=.env "
             sh " oc apply -f mongodb-deployment.yaml"
           }
        }
@@ -102,8 +102,8 @@ pipeline {
 
     stage('Deploy objectStorage_api to openshift') {
         steps {
+            sh "oc delete configmap db-env"
             sh "oc create configmap os-env --from-env-file=.env"
-
             sh 'oc project $OPENSHIFT_PROJECT'
             sh "sed -i 's|image: .*|image: ${DOCKER_USER}/${IMAGE_NAME}:v${env.BUILD_NUMBER}|' deployment.yaml"
             sh "oc apply -f deployment.yaml"
