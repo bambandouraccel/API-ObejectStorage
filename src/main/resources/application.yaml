@@ -7,7 +7,9 @@ spring:
   data:
     mongodb:
       authentication-database: admin
-      uri: ${DATABASE_URL}
+      #uri: ${DATABASE_URL}
+      #      uri: mongodb://admin:admin@localhost:27017/objectStorageDB?authSource=admin
+      uri: mongodb://admin:admin@192.168.42.140:27017/objectStorageDB?authSource=admin
       auto-index-creation: true
   banner:
     charset: UTF-8
@@ -26,7 +28,7 @@ logging:
             repository:
               query: DEBUG
 server:
-  port: ${PORT}
+  port: 8080
 
 
 

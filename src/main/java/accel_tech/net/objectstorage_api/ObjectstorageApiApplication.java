@@ -17,10 +17,10 @@ public class ObjectstorageApiApplication {
 
 	public static void main(String[] args) {
 
-		Dotenv dotenv = Dotenv.load();
+		/*Dotenv dotenv = Dotenv.load();
 
 		System.setProperty("DATABASE_URL", dotenv.get("DATABASE_URL"));
-		System.setProperty("PORT", dotenv.get("PORT"));
+		System.setProperty("PORT", dotenv.get("PORT"));*/
 
 		SpringApplication.run(ObjectstorageApiApplication.class, args);
 

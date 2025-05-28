@@ -8,10 +8,13 @@ COPY pom.xml .
 RUN ./mvnw package -DskipTests
 
 ## EXECUTE APPLICATION stage 2 ##
-FROM openjdk:17-jre
+FROM openjdk:17-jdk
 WORKDIR /usr/app
-COPY --from=builder /usr/build/target/rest-api.jar rest-api.jar
+COPY --from=builder /usr/build/target/objectstorage-api-0.0.1-SNAPSHOT.jar objectstorage-api.jar
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","rest-api.jar"]
+ENTRYPOINT ["java","-jar","objectstorage-api.jar"]
+
+
+
 
 
