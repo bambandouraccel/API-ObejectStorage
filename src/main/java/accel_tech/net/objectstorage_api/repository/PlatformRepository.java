@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PlatformRepository extends MongoRepository<Platform, String> {
     boolean existsPlatformByName(String name);
+    Platform findPlatformByRegion(String region);
 }

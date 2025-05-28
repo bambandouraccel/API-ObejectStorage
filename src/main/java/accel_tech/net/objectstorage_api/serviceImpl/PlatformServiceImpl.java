@@ -3,6 +3,7 @@ package accel_tech.net.objectstorage_api.serviceImpl;
 import accel_tech.net.objectstorage_api.dto.PlatformDto;
 import accel_tech.net.objectstorage_api.dto.UpdatePlatformRequestDto;
 import accel_tech.net.objectstorage_api.entity.Platform;
+import accel_tech.net.objectstorage_api.enumation.Kind;
 import accel_tech.net.objectstorage_api.exception.BadRequestException;
 import accel_tech.net.objectstorage_api.exception.ResourceNotFoundException;
 import accel_tech.net.objectstorage_api.repository.PlatformRepository;
@@ -22,6 +23,7 @@ import java.util.List;
 public class PlatformServiceImpl implements PlatformService {
 
     private final PlatformRepository platformRepository;
+    private final KubernetesApiValidator kubernetesApiValidator;
 
     @Override
     public List<PlatformDto> findAllPlatforms() {
@@ -40,6 +42,8 @@ public class PlatformServiceImpl implements PlatformService {
         if (platformRepository.existsPlatformByName(dto.getName())) {
             throw new BadRequestException("Platform with name '" + dto.getName() + "' already exists");
         }
+        kubernetesApiValidator.validateKubernetesAccess(dto.getApiUrl(), dto.getApiToken());
+
         Platform platform = new Platform();
         mapDtoToEntity(dto, platform);
         Platform addPlatform = platformRepository.save(platform);
@@ -54,14 +58,17 @@ public class PlatformServiceImpl implements PlatformService {
         if (updateDto.getIsActive() != null) {
             existingPlatform.setIsActive(updateDto.getIsActive());
         }
-        if (updateDto.getName() != null) {
-            existingPlatform.setName(updateDto.getName());
-        }
-        if (updateDto.getKind() != null) {
-            existingPlatform.setKind(updateDto.getKind());
+        if (updateDto.getApiToken() != null) {
+            existingPlatform.setApiToken(updateDto.getApiToken());
         }
         if (updateDto.getApiUrl() != null) {
             existingPlatform.setApiUrl(updateDto.getApiUrl());
+        }
+        if (updateDto.getStorageClassName() != null) {
+            existingPlatform.setStorageClassName(updateDto.getStorageClassName());
+        }
+        if (updateDto.getGlobalEndpoint() != null) {
+            existingPlatform.setGlobalEndpoint(updateDto.getGlobalEndpoint());
         }
         Platform updatedPlatform = platformRepository.save(existingPlatform);
         return mapEntityToDto(updatedPlatform);
@@ -89,14 +96,22 @@ public class PlatformServiceImpl implements PlatformService {
         platformDto.setKind(platform.getKind());
         platformDto.setApiUrl(platform.getApiUrl());
         platformDto.setIsActive(platform.getIsActive());
+        platformDto.setStorageClassName(platform.getStorageClassName());
+        platformDto.setGlobalEndpoint(platform.getGlobalEndpoint());
+        platformDto.setRegion(platform.getRegion());
         return platformDto;
     }
 
     private void mapDtoToEntity(PlatformDto platformDto, Platform platform){
         platform.set_id(platformDto.get_id());
         platform.setName(platformDto.getName());
-        platform.setKind(platformDto.getKind());
+        platform.setKind(String.valueOf(Kind.Kubernetes));
         platform.setApiUrl(platformDto.getApiUrl());
+        platform.setApiToken(platformDto.getApiToken());
         platform.setIsActive(platformDto.getIsActive() != null ? platformDto.getIsActive() : true);
+        platform.setStorageClassName(platformDto.getStorageClassName());
+        platform.setGlobalEndpoint(platformDto.getGlobalEndpoint());
+        platform.setRegion(platformDto.getRegion());
+
     }
 }

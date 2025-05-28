@@ -1,6 +1,8 @@
 spring:
   profiles:
     active: dev
+  main:
+    allow-bean-definition-overriding: true
   # Database Properties
   data:
     mongodb:
@@ -25,3 +27,6 @@ logging:
               query: DEBUG
 server:
   port: ${PORT}
+
+
+

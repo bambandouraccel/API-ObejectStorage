@@ -1,11 +1,9 @@
 package accel_tech.net.objectstorage_api.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+
 import lombok.*;
-import org.hibernate.validator.constraints.URL;
+
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -29,32 +27,36 @@ public class Platform implements Serializable {
     private String _id;
 
     @Indexed(unique = true)
-    @NotBlank(message = "Name is required")
-    @Size(max = 50, message = "Name must be less than 50 characters")
-    @Field(name = "Name")
+    @Field(name = "name")
     private String name;
 
-    @Pattern(regexp = "^(kubernetes)$", message = "Invalid platform kind")
     @Field(name = "kind")
     private String kind;
 
-    @URL(message = "API URL must be a valid URL")
     @Field(name = "api_url")
     private String apiUrl;
 
-    @NotBlank(message = "API token is required")
     @Field(name = "api_token")
     private String apiToken;
 
+    @Field(name = "region")
+    private String region;
+
     @Field(name = "is_active")
-    private Boolean isActive = true; // Default Value
+    private Boolean isActive = true;
+
+    @Field(name = "storage_class_name")
+    private String storageClassName;
+
+    @Field(name = "global_endpoint")
+    private String globalEndpoint;
 
     @CreatedDate
-    @Field(name = "Created_At")
+    @Field(name = "created_at")
     private Date createdAt;
 
     @LastModifiedDate
-    @Field(name = "Updated_At")
+    @Field(name = "updated_at")
     private Date updatedAt;
 
 }
